@@ -1,0 +1,7 @@
+d:\documents\visual studio 2013\Projects\Mod\Mod.IDAL\bin\Debug\Mod.IDAL.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.IDAL\bin\Debug\Mod.IDAL.pdb
+d:\documents\visual studio 2013\Projects\Mod\Mod.IDAL\bin\Debug\Mod.Models.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.IDAL\bin\Debug\Mod.Models.pdb
+d:\documents\visual studio 2013\Projects\Mod\Mod.IDAL\obj\Debug\Mod.IDAL.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2013\Projects\Mod\Mod.IDAL\obj\Debug\Mod.IDAL.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.IDAL\obj\Debug\Mod.IDAL.pdb

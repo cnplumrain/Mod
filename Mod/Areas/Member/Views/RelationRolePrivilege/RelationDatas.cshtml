@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Mod.Models.Member.Role>
+@{
+    ViewBag.Title = "RelationDatas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RelationDatas</title>
+    <script type="text/javascript">
+        function DeleteRelation() {
+            var data = getSelectedDatas();
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("DeleteRelation", "RelationRolePrivilege", new { area = "Member" })',
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+    @*<button onclick="CreateRow()">添加</button>*@
+    <button onclick="DeleteRelation()">删除</button>
+    <table id="table" class="table">
+        <tr>
+            <th style="cursor: pointer" onclick="checkAll();">选择</th>
+            <th>角儿名</th>
+            <th>角色说明</th>
+            <th colspan="2">权限</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            var role = item;
+            var privileges = role.Privileges;
+            var length = 0;
+            if (privileges != null) { length = privileges.Count() + 1; }
+            <tr>
+                <td rowspan="@length"><input type="text" name="Id" value="@role.Id" /></td>
+                <td rowspan="@length"><input type="text" name="Name" value="@role.Name" /></td>
+                <td rowspan="@length"><input type="text" name="Description" value="@role.Description" style="width: 150px" /></td>
+            </tr>
+            if (privileges != null)
+            {
+                foreach (var privilege in privileges)
+                {
+                    var data = privilege;
+                
+                    <tr>
+                        <td><input type="checkbox" name="Id" value="@data.Id" onchange=" checkthis(this); " /></td>
+                        <td><input type="text" name="Name" value="@data.Name" /></td>
+                    </tr>
+                }
+            }
+        }
+
+    </table>
+    @*<button onclick="saveDatas()">保存</button>*@
+</body>
+</html>

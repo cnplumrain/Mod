@@ -1,0 +1,111 @@
+﻿@using Mod.Models
+@using Mod.Models.Member
+@model IEnumerable<Mod.Models.Member.User>
+@{
+    ViewBag.Title = "UserDatas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserDatas</title>
+    <script type="text/javascript">
+        @*function saveDatas() {
+            var data = getSelectedDatas();
+
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("SaveDatas", "User", new { area = "Member" })',
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                }
+            });
+        }*@
+
+        function GrantRole() {
+           
+            var userDoms = getSelectedDoms();
+            if (!userDoms || userDoms.length < 1) {
+                alert("请选择一行!");
+                return;
+            }
+            if (userDoms.length > 1) {
+                alert("只能选择一行!");
+                return;
+            }
+          
+            var roleDom = $("#rolelist option:selected");
+            if (!roleDom || roleDom.length<1) {
+                alert("请选择角色!");
+                return;
+            }
+            var userId = userDoms[0].value;
+            var roleId = $("#rolelist option:selected").val();
+           
+            var data = {
+                userId: userId,
+                roleId: roleId
+            };
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("RelateUserRole", "RelationUserRole", new { area = "Member" })',
+                //contentType: "application/json; charset=utf-8",
+                data:data,
+                success: function (result) {
+                    alert(result);
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+   @{
+       var roles = ViewData["Roles"] as List<Role>;
+       var selectList = new SelectList(roles,"Id","Name");
+       
+   }
+   
+    <table id="table" class="table">
+        <tr>
+            <th style="cursor: pointer" onclick="checkAll();">选择</th>
+            <th>用户名</th>
+            <th>昵  称</th>
+            <th colspan="2">角  色</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            var user = item;
+            var userRoles = user.Roles;
+            var length = 0;
+            if (userRoles!=null) { length=userRoles.Count()+1; }
+            <tr>
+                <td rowspan="@length"><input type="checkbox" name="Id" value="@user.Id"/></td>
+                <td rowspan="@length"><input type="text" name="Name" value="@user.UserName" /></td>
+                <td rowspan="@length"><input type="text" name="Description" value="@user.DisplayName" style="width: 150px" /></td>
+            </tr>
+            if (userRoles != null)
+            {
+                foreach (var item1 in userRoles)
+                {
+                    var role = item1;
+                    <tr>
+                        <td><input type="text" name="Name" value="@role.Name" /></td>
+                    </tr>
+                }
+            }
+        }
+
+    </table>
+    @Html.ListBox("Roles",selectList,new{id="rolelist",style="width:400px"})
+    <br/>
+    <button onclick="GrantRole();">添加</button>
+    @*<button onclick="saveDatas()">保存</button>*@
+</body>
+</html>
+

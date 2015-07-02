@@ -1,0 +1,54 @@
+﻿@using Microsoft.Ajax.Utilities
+@model IEnumerable<Mod.Models.Member.Role>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RoleDatas</title>
+    <script type="text/javascript">
+       
+
+        function saveDatas() {
+            var data = getSelectedDatas();
+            
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("SaveDatas", "Role", new { area = "Member" })',
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                }
+            });
+        }
+
+    </script>
+
+</head>
+<body>
+    <button onclick="CreateRow()">添加</button>
+    <table id="table" class="table">
+        <tr>
+            <th style="cursor: pointer" onclick="checkAll();">选择</th>
+            <th>角色名</th>
+            <th style="width:150px">说明</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            var role = item;
+            <tr>
+                <td><input type="checkbox" name="Id" value="@role.Id" onchange="checkthis(this);" /></td> 
+                <td><input type="text" name="Name" value="@role.Name"/></td>
+                <td><input type="text" name="Description" value="@role.Description"  style="width: 150px"/></td>
+            </tr>
+        }
+
+    </table>
+    <button onclick="saveDatas()">保存</button>
+</body>
+</html>

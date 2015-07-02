@@ -1,0 +1,7 @@
+d:\documents\visual studio 2013\Projects\Mod\Mod.IBLL\bin\Debug\Mod.IBLL.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.IBLL\bin\Debug\Mod.IBLL.pdb
+d:\documents\visual studio 2013\Projects\Mod\Mod.IBLL\bin\Debug\Mod.Models.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.IBLL\bin\Debug\Mod.Models.pdb
+d:\documents\visual studio 2013\Projects\Mod\Mod.IBLL\obj\Debug\Mod.IBLL.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2013\Projects\Mod\Mod.IBLL\obj\Debug\Mod.IBLL.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.IBLL\obj\Debug\Mod.IBLL.pdb

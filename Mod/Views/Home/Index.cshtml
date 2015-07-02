@@ -1,0 +1,14 @@
+﻿
+@{
+    Layout = null;
+}
+<h1>导航</h1>
+<a href="@Url.Action("Login","User",new{area="Member"})">登录</a>
+<a href="@Url.Action("Register","User",new{area="Member"})">注册</a>
+<a href="@Url.Action("ForgetPassword","User",new{area="Member"})">忘记密码</a>
+
+
+
+
+@*@Html.ActionLink("登录","Login","User",new{area="Member"},null)
+@Html.ActionLink("注册", "Register","User", new { area = "Member" },null)*@

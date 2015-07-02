@@ -1,0 +1,16 @@
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\obj\Debug\Mod.DAL.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\Mod.DAL.dll.config
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\Mod.DAL.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\Mod.DAL.pdb
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\EntityFramework.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\EntityFramework.SqlServer.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\Mod.IDAL.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\Mod.Models.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\Mod.IDAL.pdb
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\Mod.Models.pdb
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\EntityFramework.xml
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\EntityFramework.SqlServer.xml
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\obj\Debug\Mod.DAL.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.DAL\obj\Debug\Mod.DAL.pdb

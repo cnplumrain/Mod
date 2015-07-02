@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Mod.Models.Member.Privilege>
+@{
+    ViewBag.Title = "PrivilegeDatas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function saveDatas() {
+        var data = getSelectedDatas();
+       
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("SaveDatas", "Privilege", new { area = "Member" })',
+            contentType: "application/json; charset=utf-8",
+            data: data,
+            success: function (result) {
+                alert(result);
+            }
+        });
+    }
+
+</script>
+<table class="table">
+    <tr>
+        <th onclick="checkAll()">选择</th>
+        <th>权限名称</th>
+        <th>控制器名</th>
+        <th>方法名</th>
+        <th>通用权限</th>
+        <th>参数个数</th>
+        <th>请求类型</th>
+        <th>描述</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        var privilege = item;
+        <tr>
+            <td><input type="checkbox" name="Id" value="@privilege.Id" onchange="checkthis(this)"/></td>
+            <td style="width:150px"><input type="text" name="Name" value="@privilege.Name" style="width: 150px"/></td>
+            <td style="width:150px"><input type="text" name="ControllerName" value="@privilege.ControllerName" style="width: 150px" /></td>
+            <td style="width:200px"><input type="text" name="ActionName" value="@privilege.ActionName" style="width: 200px" /></td>
+            <td><input type="text" name="IsCommon" value="@privilege.IsCommon.ToString()" /></td>
+            <td><input type="text" name="ParamNums" value="@privilege.ParamNums" /></td>
+            <td><input type="text" name="RequestMethod" value="@privilege.RequestMethod" /></td>
+            <td style="width:500px"><input type="text" name="Description" value="@privilege.Description" style="width:500px" /></td>
+        </tr>
+    }
+</table>
+<button onclick="saveDatas()">保存</button>

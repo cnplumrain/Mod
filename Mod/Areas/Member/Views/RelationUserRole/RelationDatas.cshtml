@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Mod.Models.Member.User>
+@{
+    ViewBag.Title = "RelationDatas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RelationDatas</title>
+    <script type="text/javascript">
+        function DeleteRelation() {
+            var userDoms = getSelectedDoms("UserId");
+            if (userDoms.length != 1) {
+                alert("请选择一个用户!");
+                return;
+            }
+            var userId = userDoms[0].value;
+            var roleDoms = getSelectedDoms("RoleId");
+            if (roleDoms.length < 1) {
+                alert("请选择至少一个角色!");
+                return;
+            }
+            var roles = [];
+            for (var i = 0; i < roleDoms.length; i++) {
+                var roleId = roleDoms[i].value;
+                roles.push(roleId);
+            }
+            var param = {
+                userId: userId,
+                roles: roles
+            }
+            var data = $.param(param, true);
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("DeleteRelation", "RelationUserRole", new {area = "Member"})',
+               // contentType: "application/json; charset=utf-8",
+                data:data,
+                success: function (result) {
+                    alert(result);
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+    @*<button onclick="CreateRow()">添加</button>*@
+    <button onclick="DeleteRelation()">删除</button>
+    <table id="table" class="table">
+        <tr>
+            <th style="cursor: pointer" onclick="checkAll();">选择</th>
+            <th>用户名</th>
+            <th>昵  称</th>
+            <th colspan="2">角  色</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            var user = item;
+            var roles = user.Roles;
+            var length = 0;
+            if (roles != null) { length = roles.Count() + 1; }
+            <tr>
+                <td rowspan="@length"><input type="checkbox" name="UserId" value="@user.Id" /></td>
+                <td rowspan="@length"><input type="text" name="UserName" value="@user.UserName" /></td>
+                <td rowspan="@length"><input type="text" name="Description" value="@user.DisplayName" style="width: 150px" /></td>
+            </tr>
+            if (roles != null)
+            {
+                foreach (var data in roles)
+                {
+                    var role = data;
+                   
+                    <tr>
+                        <td><input type="checkbox" name="RoleId" value="@role.Id" onchange=" checkthis(this); " /></td>
+                        <td><input type="text" name="RoleName" value="@role.Name" /></td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+    @*<button onclick="saveDatas()">保存</button>*@
+</body>
+</html>
+
+

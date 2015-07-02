@@ -1,0 +1,34 @@
+﻿@using System.Globalization
+@using Mod.Models.Member
+@model Menu
+@{
+    ViewBag.Title = "AddMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>添加菜单</h2>
+@{
+    var menus = ViewData["Menus"] as List<Menu>;
+    var selectList = new List<SelectListItem>();
+    if (menus != null && menus.Any())
+    {
+        foreach (var menu in menus)
+        {
+           
+                var listItem = new SelectListItem
+                {
+                    Text = menu.Name,
+                    Value = menu.Id.ToString(CultureInfo.InvariantCulture)
+                };
+                selectList.Add(listItem);
+            
+        }
+    }
+    //var list = new SelectList(menus, "Id","Name");
+}
+<form>
+    <input type="text" name="Name" value="@Model.Name" />
+    <input type="text" name="Url" value="@Model.Url" />
+    @Html.DropDownList("Parent", selectList)
+    <button type="submit">确定</button>
+</form>

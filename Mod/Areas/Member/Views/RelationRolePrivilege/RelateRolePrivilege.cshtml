@@ -1,0 +1,119 @@
+﻿@using Mod.Models
+@using Mod.Models.Member
+@model IEnumerable<Mod.Models.Member.Role>
+@{
+    ViewBag.Title = "RelateRolePrivilege";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserDatas</title>
+    <script type="text/javascript">
+        @*function saveDatas() {
+            var data = getSelectedDatas();
+
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("SaveDatas", "User", new { area = "Member" })',
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                }
+            });
+        }*@
+
+        function GrantRole() {
+
+            var roleDoms = getSelectedDoms();
+            if (!roleDoms || roleDoms.length < 1) {
+                alert("请选择一行!");
+                return;
+            }
+            if (roleDoms.length > 1) {
+                alert("只能选择一行!");
+                return;
+            }
+
+            var privilegeDom = $("#rolelist option:selected");
+            if (!privilegeDom || privilegeDom.length < 1) {
+                alert("请选择角色!");
+                return;
+            }
+            var roleId = roleDoms[0].value;
+            var privilegeId = $("#rolelist option:selected").val();
+
+            var data = {
+                roleId: roleId,
+                privilegeId: privilegeId
+            };
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("RelateRolePrivilege", "RelationRolePrivilege", new { area = "Member" })',
+                //contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+    @{
+        var privileges = ViewData["Privileges"] as List<Privilege>;
+        var selectList = new SelectList(privileges, "Id", "Name");
+
+    }
+
+    <table id="table" class="table">
+        <tr>
+            <th style="cursor: pointer" onclick="checkAll();">选择</th>
+            <th>角色名</th>
+            <th colspan="2">权限</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            var role = item;
+            var rolePrivileges = role.Privileges;
+            var length = 0;
+            if (rolePrivileges != null) { length = rolePrivileges.Count() + 1; }
+            <tr>
+                <td rowspan="@length"><input type="checkbox" name="Id" value="@role.Id" /></td>
+                <td rowspan="@length"><input type="text" name="Name" value="@role.Name" style="width: 150px" /></td>
+            </tr>
+            if (rolePrivileges != null)
+            {
+                foreach (var privilege in rolePrivileges)
+                {
+                    var data = privilege;
+                    
+                    <tr>
+                        <td style="width: 150px"><input type="text" name="Name" value="@data.Name" style="width: 300px" /></td>
+                    </tr>
+                }
+            }
+        }
+
+    </table>
+    @Html.ListBox("Privileges", selectList, new { id = "rolelist",style = "width:400px;height:600px" })
+    @*<select id="rolelist" name="Privileges" multiple="multiple" style="width:400px;height:600px">
+        @foreach (var item in selectList)
+        {
+            <option value="@item.Value">@item.Text</option>
+        }
+    </select>*@
+    <br />
+    <button onclick="GrantRole();">添加</button>
+    @*<button onclick="saveDatas()">保存</button>*@
+</body>
+</html>
+
+
+
+

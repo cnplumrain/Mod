@@ -1,0 +1,59 @@
+﻿
+@model IEnumerable<Mod.Models.Member.Privilege>
+@{
+    ViewBag.Title = "MenuPrivilege";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script language="javascript" type="text/javascript">
+    //说明 所有的元素以ul li ul li ul li的循环格式嵌套 如果没有下级分类 就用li a结束嵌套
+    $(document).ready(function () {
+        //$(".nav ul li").children("ul").hide();
+        $(".nav").find("li").not(":has(ul)").children("a").css({ textDecoration: "none", color: "#333", background: "none" })
+        .click(function () {
+            $(this).get(0).location.href = "'" + $(this).attr("href") + "'";
+        });
+        $(".nav").find("li:has(ul)").children("a").css({ background: "url(/Content/images/statu_close.png) no-repeat left top;" })
+        .click(function () {
+            if ($(this).next("ul").is(":hidden")) {
+                $(this).next("ul").slideDown("slow");
+                if ($(this).parent("li").siblings("li").children("ul").is(":visible")) {
+                    $(this).parent("li").siblings("li").find("ul").slideUp("1000");
+                    $(this).parent("li").siblings("li:has(ul)").children("a").css({ background: "url(~/Content/images/statu_close.png) no-repeat left top;" })
+                    .end().find("li:has(ul)").children("a").css({ background: "url(~/Content/images/statu_close.png) no-repeat left top;" });
+                }
+                $(this).css({ background: "url(~/Content/images/statu_open.png) no-repeat left top;" });
+                return false;
+            } else {
+                $(this).next("ul").slideUp("normal");
+                //不用toggle()的原因是为了在收缩菜单的时候同时也将该菜单的下级菜单以后的所有元素都隐藏
+                $(this).css({ background: "url(~/Content/images/statu_close.png) no-repeat left top;" });
+                $(this).next("ul").children("li").find("ul").fadeOut("normal");
+                $(this).next("ul").find("li:has(ul)").children("a").css({ background: "url(~/Content/images/statu_close.png) no-repeat left top;" });
+                return false;
+            }
+        });
+    });
+</script>
+
+
+<div class="nav"style="float: left;width:200px;height: 100%">
+    <h2>菜单目录</h2>
+    @{
+        var privileges = Model;
+        var groupList = privileges.GroupBy(m => new{m.AreaName});
+    }
+    @foreach (var item in groupList)
+    {
+        <ul>
+            <li><a href="#">@item.Key.AreaName</a>
+                <ul>
+                    @foreach (var item2 in item)
+                    {
+                        <li><a href="@Url.Action(item2.ActionName,item2.ControllerName,new{area=item2.AreaName})">@item2.Name</a></li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    }
+</div>
+

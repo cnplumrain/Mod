@@ -1,0 +1,5 @@
+d:\documents\visual studio 2013\Projects\Mod\Mod.Common\bin\Debug\Mod.Common.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.Common\bin\Debug\Mod.Common.pdb
+d:\documents\visual studio 2013\Projects\Mod\Mod.Common\obj\Debug\Mod.Common.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2013\Projects\Mod\Mod.Common\obj\Debug\Mod.Common.dll
+d:\documents\visual studio 2013\Projects\Mod\Mod.Common\obj\Debug\Mod.Common.pdb
